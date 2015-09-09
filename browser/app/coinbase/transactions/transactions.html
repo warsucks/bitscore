@@ -1,0 +1,12 @@
+<div class="white">
+  <ul class="history">
+    <li ng-repeat="txn in transactions">
+      Sender: {{txn.sender.name}} ({{txn.sender.id}})<br>
+      Recipient: {{txn.recipient.name}} ({{txn.recipient.id}})<br>
+      Amount: {{txn.amount.amount}} {{txn.amount.currency}}<br>
+      Status: {{txn.status}}<br>
+      Timestamp: {{txn.created_at}}<br>
+      <br>
+    </li>
+  </ul>
+</div>
