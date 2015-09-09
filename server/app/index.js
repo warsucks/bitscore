@@ -23,7 +23,7 @@ app.use('/auth', require('../auth/auth.router'));
 
 app.use('/coinbase', require('../coinbase/coinbase.router.js'))
 
-var validFrontendRoutes = ['/', '/stories', '/users', '/stories/:id', '/users/:id', '/signup', '/login', '/coinbase'];
+var validFrontendRoutes = ['/', '/stories', '/users', '/stories/:id', '/users/:id', '/signup', '/login', '/coinbase', '/loan'];
 var indexPath = path.join(__dirname, '..', '..', 'public', 'index.html');
 validFrontendRoutes.forEach(function (stateRoute) {
 	app.get(stateRoute, function (req, res) {

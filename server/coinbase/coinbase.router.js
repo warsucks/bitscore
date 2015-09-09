@@ -10,6 +10,7 @@ router.get('/account', function(req, res, next)
 
   client.getAccounts(function(err, accounts)
   {
+    if(err) console.log("error getting accounts", err.message);
     console.log("router got accounts", accounts);
     var acct = accounts[0];
     res.send(acct);
