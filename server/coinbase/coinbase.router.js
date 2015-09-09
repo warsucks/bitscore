@@ -6,12 +6,10 @@ console.log("cb", cb);
 router.get('/account', function(req, res, next)
 {
   var client = cb.getClient();
-  console.log("router got client", client);
 
   client.getAccounts(function(err, accounts)
   {
     if(err) console.log("error getting accounts", err.message);
-    console.log("router got accounts", accounts);
     var acct = accounts[0];
     res.send(acct);
   })
@@ -20,17 +18,13 @@ router.get('/account', function(req, res, next)
 router.use('/transactions', function(req, res, next)
 {
   var client = cb.getClient();
-  console.log("router got client", client);
-
   client.getAccounts(function(err, accounts)
   {
-    console.log("router got accounts", accounts);
     accounts.forEach(function(acct)
     {
       acct.getTransactions(1, 10, function(err, txns)
       {
-        if(err) console.log("error", err.message);
-        console.log("router got transactions", txns);
+        if(err) console.log("error getting transactions", err.message);
         res.send(txns);
       })
     });
@@ -39,16 +33,15 @@ router.use('/transactions', function(req, res, next)
 
 router.post('/loan', function(req, res, next)
 {
+  console.log("making loan in router");
   var recipientEmail = req.body.recipientEmail;
   var loanAmount = req.body.amount;
   var term = req.body.term;
 
   var client = cb.getClient();
-  console.log("router got client", client);
 
   client.getAccounts(function(err, accounts)
   {
-    console.log("router got accounts", accounts);
     var acct = accounts[0];
     var args = {
            "to"     : recipientEmail,
@@ -58,6 +51,7 @@ router.post('/loan', function(req, res, next)
     acct.transferMoney(args, function(err, txn)
     {
       if(err) console.log("error making loan", err.message);
+      console.log("made loan", txn);
       res.send(txn);
     });
   })
