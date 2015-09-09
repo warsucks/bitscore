@@ -1,18 +1,20 @@
 <div class="white">
     <div>
         <div id="graph"></div>
-        <span class="mu">mu</span>
+        <span class="mu-label">
+            Estimated borrowing potential at 50% risk:
+            <span class="mu" id="mu"></span>
+        </span>
     </div>
 </div>
 
 <script type="text/javascript">
 
-d3.json('http://52.88.202.193/api/user/12RL3jsBWLavvG4f9a3S6MagRZo7Ai24CK/',function(error,user){
+d3.json('http://52.88.202.193/api/user/{{user}}/',function(error,user){
     var data = [];
     var x_list = user.result.x;
     var y_list = user.result.y;
 
-    //getData(); // popuate data
     fillData();
 
     // line chart based on http://bl.ocks.org/mbostock/3883245
@@ -83,38 +85,11 @@ d3.json('http://52.88.202.193/api/user/12RL3jsBWLavvG4f9a3S6MagRZo7Ai24CK/',func
         data = x_list.map(function(el,idx){
             return {"q":el, "p":y_list[idx]};
         });
+        data.sort(function(x, y) {
+            return x.q - y.q;
+        }); 
+        var limit = mean+' BTC';
+        $('#mu').text(limit);
     }
-
-
-    function getData() {
-        var mean = 0; 
-        var sigma = 1; 
-        // loop to populate data array with 
-        // probabily - quantile pairs
-        for (var i = 0; i < 100000; i++) {
-            if (!i) console.log(mean,sigma);
-            q = d3.random.normal()();
-            p = gaussian(q,mean,sigma) // calc prob of rand draw
-            el = {
-                "q": q,
-                "p": p
-            }
-            data.push(el)
-    };
-
-    // need to sort for plotting
-    //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
-    data.sort(function(x, y) {
-        return x.q - y.q;
-    }); 
-    }
-
-    //taken from Jason Davies science library
-    // https://github.com/jasondavies/science.js/
-    function gaussian(x,mean,sigma) {
-        var gaussianConstant = 1 / Math.sqrt(2 * Math.PI);
-        x = (x - mean) / sigma;
-        return gaussianConstant * Math.exp(-.5 * x * x) / sigma;
-    };
 });
 </script>
