@@ -1,10 +1,4 @@
-<div>
-    <div id="graph"></div>
-    <span class="mu">mu</span>
-</div>
-
-<script type="text/javascript">
-    //setting up empty data array
+//setting up empty data array
 var data = [];
 
 getData(); // popuate data 
@@ -12,12 +6,12 @@ getData(); // popuate data
 // line chart based on http://bl.ocks.org/mbostock/3883245
 var margin = {
         top: 20,
-        right: 5,
+        right: 20,
         bottom: 30,
-        left: 5
+        left: 50
     },
     // get el width and height
-    width = parseInt(d3.select('#graph').style('width'), 10)-5,
+    width = parseInt(d3.select('#graph').style('width'), 10) * 0.9,
     height = 300 - margin.top - margin.bottom; // fixed height for now
 
 var x = d3.scale.linear()
@@ -28,13 +22,11 @@ var y = d3.scale.linear()
 
 var xAxis = d3.svg.axis()
     .scale(x)
-    .orient("bottom")
-    .ticks(0);
+    .orient("bottom");
 
 var yAxis = d3.svg.axis()
     .scale(y)
-    .orient("left")
-    .ticks(0);
+    .orient("left");
 
 var line = d3.svg.line()
     .x(function(d) {
@@ -73,8 +65,8 @@ svg.append("path")
 
 
 function getData() {
-    var mean = 0; 
-    var sigma = 1; 
+    var mean = 0;
+    var sigma = 1;
     // loop to populate data array with 
     // probabily - quantile pairs
     for (var i = 0; i < 100000; i++) {
@@ -92,14 +84,72 @@ function getData() {
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
 data.sort(function(x, y) {
     return x.q - y.q;
-}); 
+});	
 }
 
 //taken from Jason Davies science library
 // https://github.com/jasondavies/science.js/
 function gaussian(x,mean,sigma) {
-    var gaussianConstant = 1 / Math.sqrt(2 * Math.PI);
+	var gaussianConstant = 1 / Math.sqrt(2 * Math.PI);
     x = (x - mean) / sigma;
     return gaussianConstant * Math.exp(-.5 * x * x) / sigma;
 };
-</script>
+
+var spareRandom = null;
+
+function normalRandom()
+{
+    var val, u, v, s, mul;
+
+    if(spareRandom !== null)
+    {
+        val = spareRandom;
+        spareRandom = null;
+    }
+    else
+    {
+        do
+        {
+            u = Math.random()*2-1;
+            v = Math.random()*2-1;
+
+            s = u*u+v*v;
+        } while(s === 0 || s >= 1);
+
+        mul = Math.sqrt(-2 * Math.log(s) / s);
+
+        val = u * mul;
+        spareRandom = v * mul;
+    }
+    
+    return val / 14;    // 7 standard deviations on either side
+}
+
+function normalRandomInRange(min, max)
+{
+    var val;
+    do
+    {
+        val = normalRandom();
+    } while(val < min || val > max);
+    
+    return val;
+}
+
+function normalRandomScaled(mean, stddev)
+{
+    var r = normalRandomInRange(-1, 1);
+
+    r = r * stddev + mean;
+
+    return Math.round(r);
+}
+
+function lnRandomScaled(gmean, gstddev)
+{
+    var r = normalRandomInRange(-1, 1);
+
+    r = r * Math.log(gstddev) + Math.log(gmean);
+
+    return Math.round(Math.exp(r));
+}
