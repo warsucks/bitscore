@@ -1,7 +1,22 @@
 <div class="white">
+	<table class="table">
+		<tbody>
+		 	<th>lender</th>
+		 	<th>amount</th>
+		 	<th>due</th>
+    <tr ng-repeat="loan in loans">
+      <td>
+      	{{loan.lender}}
+      </td>
+      <td>
+      	{{loan.amount}}
+      </td>
+      <td>
+      	{{loan.dueby}}
+      </td>
+    </tr>			
+		</tbody>
+	</table>
   <ul class="history">
-    <li ng-repeat="loan in loans">
-      {{ loan }}
-    </li>
   </ul>
 </div>

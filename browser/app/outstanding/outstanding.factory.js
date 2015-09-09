@@ -1,8 +1,11 @@
-app.factory('Outstanding',function($http){
+app.factory('OutstandingFactory',function($http){
 	return {
 		getLoans: function (user) {
-			$http.get('http://52.88.202.193/api/user/12RL3jsBWLavvG4f9a3S6MagRZo7Ai24CK/')
-				.then(function(response){return response.data;});
+			// $http.get('http://52.88.202.193/api/user/'+user+'/')
+			// 	.then(function(response){
+			// 		return response.data;
+			// 	});
+			return {'lender': 'kathy', 'amount': '1 billion BTC', 'dueby': 'September 9, 2099'}
 		}
 	};
 });

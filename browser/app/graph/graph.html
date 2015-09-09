@@ -8,12 +8,12 @@
 <script type="text/javascript">
 
 d3.json('http://52.88.202.193/api/user/12RL3jsBWLavvG4f9a3S6MagRZo7Ai24CK/',function(error,user){
-    console.log(error);
-    console.log(user);
-    //setting up empty data array
     var data = [];
+    var x_list = user.result.x;
+    var y_list = user.result.y;
 
-    getData(); // popuate data 
+    //getData(); // popuate data
+    fillData();
 
     // line chart based on http://bl.ocks.org/mbostock/3883245
     var margin = {
@@ -76,6 +76,14 @@ d3.json('http://52.88.202.193/api/user/12RL3jsBWLavvG4f9a3S6MagRZo7Ai24CK/',func
         .datum(data)
         .attr("class", "line")
         .attr("d", line);
+
+    function fillData() {
+        var mean = user.result.credit_mu;
+        var sigma = user.result.credit_sigma;
+        data = x_list.map(function(el,idx){
+            return {"q":el, "p":y_list[idx]};
+        });
+    }
 
 
     function getData() {
