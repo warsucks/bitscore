@@ -4,11 +4,22 @@
     stroke: #000;
     shape-rendering: crispEdges;
 }
-/*.x.axis path {
+.x.axis path {
     display: none;
-}*/
+}
+.y.axis path {
+	display:none;
+}
 .line {
     fill: none;
-    stroke: steelblue;
-    stroke-width: 1.5px;
+    stroke: darkblue;
+    stroke-width: 4px;
+}
+.mu {
+	font-size: 18px;
+	font-weight: 700;
+	color: black;
+	display:block;
+	width: 40px;
+	margin: auto;
 }
