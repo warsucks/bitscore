@@ -1,4 +1,4 @@
-app.factory("TransactionFactory", function($http)
+app.factory("TransactionFactory", function($http, AccountFactory)
 {
   return {
     makeLoan: function(recipientId, loanAmount, term, rate)
@@ -16,8 +16,10 @@ app.factory("TransactionFactory", function($http)
       return $http.get('/coinbase/transactions')
       .then(function(response)
       {
+        var account;
         console.log("client got response", response);
         console.log("client got transactions", response.data);
+
         return response.data;
       })
     }
