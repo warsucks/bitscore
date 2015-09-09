@@ -1,22 +1,77 @@
 <div class="white">
+  <h3 style="color:black">Outstanding loans</h3>
 	<table class="table">
 		<tbody>
 		 	<th>lender</th>
-		 	<th>amount</th>
-		 	<th>due</th>
-    <tr ng-repeat="loan in loans">
+		 	<th>BTC</th>
+		 	<th>term</th>
+      <th></th>
+    <tr ng-repeat="loan in loans.LIVE">
       <td>
-      	{{loan.lender}}
+      	{{loan.lender_id}}
       </td>
       <td>
-      	{{loan.amount}}
+      	{{loan.loan_amt}}
       </td>
       <td>
-      	{{loan.dueby}}
+      	{{loan.term}} yr
       </td>
+      <td><button>Pay</button></td>
     </tr>			
 		</tbody>
 	</table>
+  <ul class="history">
+  </ul>
+</div>
+
+<div class="white">
+  <h3 style="color:green">Repaid loans</h3>
+  <table class="table">
+    <tbody>
+      <th>lender</th>
+      <th>BTC</th>
+      <th>term</th>
+      <th></th>
+    <tr ng-repeat="loan in loans.PAID">
+      <td>
+        {{loan.lender_id}}
+      </td>
+      <td>
+        {{loan.loan_amt}}
+      </td>
+      <td>
+        {{loan.term}} yr
+      </td>
+      <td></td>
+    </tr>     
+    </tbody>
+  </table>
+  <ul class="history">
+  </ul>
+</div>
+
+<div class="white">
+  <h3 style="color:red">Loans in default</h3>
+  <table class="table">
+    <tbody>
+      <th>lender</th>
+      <th>BTC</th>
+      <th>term</th>
+      <th></th>
+    <tr ng-repeat="loan in loans.DEFAULT">
+      <td>
+        {{loan.lender_id}}
+      </td>
+      <td>
+        {{loan.loan_amt}}
+      </td>
+      <td>
+        {{loan.term}} yr
+      </td>
+      <td></td>
+    </tr>     
+    </tbody>
+  </table>
   <ul class="history">
   </ul>
 </div>
