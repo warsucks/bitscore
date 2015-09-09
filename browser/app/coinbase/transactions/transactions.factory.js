@@ -1,12 +1,15 @@
 app.factory("TransactionFactory", function($http)
 {
   return {
-    // makeLoan: function()
-    // {
-    //   var recipientEmail = req.body.recipientEmail;
-    //   var loanAmount = req.body.amount;
-    //   var term = req.body.term;
-    // },
+    makeLoan: function(recipientId, loanAmount, term, rate)
+    {
+      console.log("Transaction Factory making a loan");
+      return $http.post('/coinbase/loan', {recipientId: recipientId, loanAmount: loanAmount, term: term, rate: rate})
+      .then(function(response)
+      {
+        return response.data;
+      });
+    },
 
     getTransactions: function()
     {

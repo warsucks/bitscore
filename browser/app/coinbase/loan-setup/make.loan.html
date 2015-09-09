@@ -1,1 +1,15 @@
-Account: {{account}}
+<div class='col-lg-4 white'>
+  <form ng-hide="loanSuccess" ng-submit="makeLoan()">
+    <h1 style="color: black">Make a Loan</h1>
+    <p>Sender ID: {{account.id}}</p>
+    <p>Recipient ID:<input type="text" ng-model="recipientId"></p>
+    <p>Amount (BTC):<input type="text" ng-model="loanAmount"></p>
+    <p>Term (Minutes):<input type="text" ng-model="term"></p>
+    <p>Rate:<input type="text" ng-model="rate"></p>
+    <button type="submit">Make Loan</button>
+  </form>
+  <div ng-show="loanSuccess" style="color: black">
+    <p>Successfully made loan.</p>
+    <button ui-sref="home">Back Home</button>
+  </div>
+</div>
