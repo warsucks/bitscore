@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Auther</title>
+    <title>crdt</title>
     <base href="/">
     <link rel="shortcut icon" href="/favicon.ico" />
 
@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="/browser/app/user/list/user.list.css" />
     <link rel="stylesheet" href="/browser/app/story/list/story.list.css" />
     <link rel="stylesheet" href="/browser/app/story/detail/story.detail.css" />
+    <link rel="stylesheet" href="/browser/app/graph/graph.css" />
 
     <!--external JS dependencies-->
     <script src="/bower_components/jquery/dist/jquery.min.js"></script>
@@ -56,6 +57,8 @@
     <script src="/browser/app/story/story.factory.js"></script>
     <script src="/browser/app/coinbase/transactions/transactions.directive.js"></script>
     <script src="/browser/app/coinbase/transactions/transactions.factory.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="/browser/app/graph/graph.directive.js"></script>
 </head>
 <body ng-app="auther">
     <ui-view></ui-view>
