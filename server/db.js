@@ -9,7 +9,7 @@ Promise.promisifyAll(mongoose);
 
 var databaseURI = secrets.databaseURI;
 
-var db = mongoose.connect(databaseURI).connection;
+var db = mongoose.connect('localhost').connection;
 
 db.on('open', function () {
 	console.log('Database connection successfully opened');
