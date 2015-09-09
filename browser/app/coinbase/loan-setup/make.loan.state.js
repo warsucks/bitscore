@@ -6,7 +6,7 @@ app.config(function ($stateProvider) {
     {
       $scope.makeLoan = function()
       {
-        TransactionFactory.makeLoan($scope.recipientEmail, $scope.loanAmount, $scope.term)
+        TransactionFactory.makeLoan($scope.recipientId, $scope.loanAmount, $scope.term, $scope.rate)
         .then(function(txn)
         {
           $scope.madeLoan = txn;

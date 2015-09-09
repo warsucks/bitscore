@@ -1,8 +1,9 @@
 Account: {{account}}
 <form class="white" ng-submit="makeLoan()">
-  <p>Sender Coinbase ID: {{account.id}}</p>
-  <p>Recipient Email:<input type="text" ng-model="recipientEmail"></p>
+  <p>Sender ID: {{account.id}}</p>
+  <p>Recipient ID:<input type="text" ng-model="recipientId"></p>
   <p>Amount (BTC):<input type="text" ng-model="loanAmount"></p>
   <p>Term (Minutes):<input type="text" ng-model="term"></p>
+  <p>Rate:<input type="text" ng-model="rate"></p>
   <button type="submit">Make Loan</button>
 </form>
